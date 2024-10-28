@@ -1,0 +1,42 @@
+---
+import heroImage from '../../assets/hero/smart-hero-main.jpg'
+
+interface Props {
+  title?: string;
+  backgroundImage?: string;
+}
+
+const {
+  title = "CHECK OUT",
+  backgroundImage = "https://placehold.co/1920x600"
+} = Astro.props;
+---
+
+<section class="relative w-full h-[500px] overflow-hidden">
+  {/* Background Image with Overlay */}
+  {/* Fixed Background Image */}
+  <div 
+    class="absolute inset-0 bg-center bg-no-repeat bg-cover"
+    style={`background-image: url(${heroImage.src}); background-attachment: fixed;`}
+  >
+    {/* Gradient Overlay */}
+    <div class="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/60 to-dark/80"></div>
+  </div>
+
+  {/* Content */}
+  <div class="relative h-full container xl:max-w-[1280px] mx-auto px-4">
+    <div class="flex flex-col items-center justify-center h-full text-center">
+      {/* Title with Line Break for Mobile */}
+      <h1 class="text-light">
+        {title}
+      </h1>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Optional: Add any component-specific styles here */
+  section {
+    @apply bg-dark; /* Fallback color before image loads */
+  }
+</style>

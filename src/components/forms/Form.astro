@@ -1,0 +1,66 @@
+<form data-netlify="true" name="contact" method="POST" class="w-full max-w-md">
+    <div class="space-y-6">
+        {/* Full Name */}
+        <div>
+            <label for="name" class="form-label"
+                >Full Name</label
+            >
+            <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="form-input"
+            />
+        </div>
+
+        {/* Phone Number */}
+        <div>
+            <label for="phone" class="form-label"
+                >Phone Number</label
+            >
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="form-input"
+            />
+        </div>
+
+        {/* Email */}
+        <div>
+            <label for="email" class="form-label"
+                >Email</label
+            >
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="form-input"
+            />
+        </div>
+
+        {/* Comments */}
+        <div>
+            <label for="comments" class="form-label"
+                >Comments</label
+            >
+            <textarea
+                id="comments"
+                name="comments"
+                rows="4"
+                class="w-full px-4 py-3 border border-dark/50 rounded-sm
+                 font-heebo text-dark resize-none
+                 focus:outline-none focus:border-blue
+                 transition-colors duration-300"
+            ></textarea>
+        </div>
+
+        {/* Submit Button */}
+        <div>
+            <button type="submit" class="btn-primary w-full"> SUBMIT </button>
+        </div>
+    </div>
+</form>

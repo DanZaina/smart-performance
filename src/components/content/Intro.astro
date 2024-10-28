@@ -1,0 +1,37 @@
+---
+interface Props {
+  mainTitle: string;
+  highlightedText: string;
+  secondaryTitle: string;
+  subtitle: string;
+}
+
+const { 
+  mainTitle = "RIDE WITH",
+  highlightedText = "CONFIDENCE",
+  secondaryTitle = "& PRECISION",
+  subtitle = "DELIVERING THE ULTIMATE OFF-ROAD MOTORCYCLE TRAINING EXPERIENCE FOR OVER 20 YEARS."
+} = Astro.props;
+---
+
+<section class="relative bg-grey" aria-label="Introduction">
+  <div class="container xl:max-w-[1280px] mx-auto px-4 py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Title Column -->
+      <div class="flex flex-col justify-center text-left lg:text-right">
+        <h2 class="text-light">
+          {mainTitle} <span class="text-blue">{highlightedText}</span><br/>
+          <span class="text-light">{secondaryTitle}</span>
+        </h2>
+      </div>
+
+      <!-- Subtitle Column -->
+      <div class="flex items-center">
+        <div class="w-[2px] bg-white/20 h-24 mx-8 hidden lg:block"></div>
+        <h2 class="font-heebo text-lg md:text-xl text-light leading-loose">
+          {subtitle}
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>

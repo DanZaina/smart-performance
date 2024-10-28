@@ -1,0 +1,52 @@
+---
+// src/components/ContactSection.astro
+import Form from "../forms/Form.astro";
+import ContactInfo from "../contact/ContactInfo.astro";
+import SocialIcons from "../contact/SocialIcons.astro";
+import Map from "../contact/Map.astro";
+
+interface Props {
+  title: string;
+  titleHighlight: string;
+  description: string;
+}
+
+const { title, titleHighlight, description } = Astro.props;
+---
+
+<section class="w-full bg-light pt-24">
+  <div class="container xl:max-w-[1280px] mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-x-20 gap-y-12 items-start">
+      {/* Content Column */}
+      <div class="space-y-6 lg:px-8">
+        <h2 class="text-4xl font-bold leading-tight font-barlow tracking-wide">
+          <span class="text-blue">{titleHighlight}</span>
+          <span class="text-dark">{title}</span>
+        </h2>
+        <p class="text-dark font-heebo text-lg leading-relaxed">
+          {description}
+        </p>
+        {/* Contact Information */}
+        <div class="my-8">
+          <ContactInfo
+            phone="705-835-2790"
+            phoneExt="ext.1288"
+            email="smartadventures@horseshoeresort.com"
+            address="3303 3rd Line N. Barrie, ON L0L 2L0"
+          />
+        </div>
+        <div>
+          <SocialIcons theme="dark" className="justify-left" />
+        </div>
+      </div>
+
+      {/* Form Column */}
+      <div class="lg:pl-8">
+        <Form />
+      </div>
+    </div>
+    <div class="py-24">
+      <Map />
+    </div>
+  </div>
+</section>

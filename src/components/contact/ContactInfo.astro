@@ -1,0 +1,45 @@
+---
+interface Props {
+  phone?: string;
+  phoneExt?: string;
+  email?: string;
+  address?: string;
+}
+
+const {
+  phone = "705-835-2790",
+  phoneExt = "ext.1288",
+  email = "smartadventures@horseshoeresort.com",
+  address = "3303 3rd Line N. Barrie, ON L0L 2L0",
+} = Astro.props;
+
+---
+
+<div class="space-y-6">
+  {/* Phone */}
+  <a href={`tel:${phone.replace(/\D/g, "")}`} class="group flex items-center">
+    <span class="contact-text">
+      P: {phone}
+      {phoneExt}
+    </span>
+  </a>
+
+  {/* Email */}
+  <a href={`mailto:${email}`} class="group flex items-center">
+    <span class="contact-text">
+      E: {email}
+    </span>
+  </a>
+
+  {/* Address */}
+  <a
+    href={`https://maps.google.com/?q=${encodeURIComponent(address)}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group flex items-center"
+  >
+    <span class="contact-text">
+      A: {address}
+    </span>
+  </a>
+</div>

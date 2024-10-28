@@ -1,0 +1,57 @@
+---
+// Accordion.astro
+---
+
+<div class="max-w-6xl mx-auto bg-transparent border border-light/50 rounded-md">
+  <div class="accordion-item">
+    <button
+      class="accordion-header w-full flex justify-between items-center py-4 text-left"
+      aria-expanded="false"
+    >
+      <h5 class="text-light normal-case">
+        Did you used to be called something else? Have you changed ownership?
+      </h5>
+      <svg
+        class="w-6 h-6 transform transition-transform duration-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="#F8FAFC"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div
+      class="accordion-content overflow-hidden max-h-0 transition-all duration-300"
+      style="opacity: 0;"
+    >
+      <div class="py-6">
+        <p class="text-light">
+          We used to be called BMW Horseshoe, but we still have the same great
+          ownership and management as always! We wanted to streamline our name
+          with our sister company SMART Adventures located on the same property
+          - which offers ATV, motorcycle, dirt bike, snowmobile and other fun
+          riding opportunities for individuals, families and groups!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .accordion-content {
+    visibility: hidden;
+  }
+
+  .accordion-item.active .accordion-content {
+    visibility: visible;
+  }
+</style>
+
+<script>
+  import "../scripts/accordion.js";
+</script>

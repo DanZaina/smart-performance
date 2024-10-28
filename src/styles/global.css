@@ -1,0 +1,351 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Typography */
+@layer base {
+
+  /* Headings */
+  h1,
+  .h1 {
+    @apply font-barlow text-6xl md:text-6xl lg:text-6xl font-bold tracking-wide leading-tight uppercase;
+  }
+
+  h2,
+  .h2 {
+    @apply font-barlow text-4xl md:text-4xl lg:text-5xl font-bold tracking-wide leading-tight uppercase;
+  }
+
+  h3,
+  .h3 {
+    @apply font-barlow text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide leading-tight uppercase;
+  }
+
+  h4,
+  .h4 {
+    @apply font-barlow text-2xl md:text-3xl lg:text-3xl font-bold tracking-wide leading-tight uppercase;
+  }
+
+  h5,
+  .h5 {
+    @apply font-barlow text-xl md:text-2xl lg:text-2xl font-bold tracking-wide leading-tight;
+  }
+
+  h6,
+  .h6 {
+    @apply font-barlow text-xl font-bold tracking-wide leading-tight uppercase;
+  }
+
+  /* Body Text */
+  p,
+  .body-text {
+    @apply font-heebo text-lg leading-loose;
+  }
+
+  .body-text-sm {
+    @apply font-heebo text-base leading-relaxed;
+  }
+
+  /* Links */
+  a {
+    @apply transition-colors duration-300;
+  }
+}
+
+/* Contact Info */
+.contact-text {
+  @apply font-barlow text-xl text-dark transition-colors duration-300 uppercase;
+}
+
+.contact-text:hover {
+  @apply text-blue;
+}
+
+/* Components */
+@layer components {
+
+  /* Layout Components */
+  .container-default {
+    @apply container xl:max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .text-container {
+    @apply max-w-prose mx-auto space-y-6;
+  }
+
+  .grid-auto-fit {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-8 py-3 font-barlow font-bold text-lg tracking-widest transition-all duration-300 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply btn border-2 border-dark text-dark hover:bg-dark hover:text-light uppercase;
+  }
+
+  .btn-secondary {
+    @apply btn bg-blue text-light hover:bg-opacity-90 flex items-center justify-center gap-2;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-light text-light hover:bg-light hover:text-dark;
+  }
+
+  /* Navigation Styles */
+  .nav-container {
+    @apply fixed top-0 left-0 right-0 z-50 lg:bg-transparent transition-colors duration-300;
+  }
+
+  @media (max-width: 1024px) {
+    .nav-container {
+      @apply bg-dark/95 backdrop-blur-sm;
+    }
+  }
+
+  .nav-link {
+    @apply font-barlow text-light hover:text-blue transition-colors duration-200 text-lg tracking-wide;
+  }
+
+  .nav-dropdown {
+    @apply absolute left-0 top-full mt-2 w-72 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200;
+  }
+
+  .nav-dropdown-content {
+    @apply bg-dark/95 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-white/10;
+  }
+
+  /* Social Icons */
+  /* Base social icon styles */
+  .social-icon {
+    @apply w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300;
+  }
+
+  /* Light theme (white icons) */
+  .social-icon-light {
+    @apply border border-light text-light hover:text-blue hover:border-blue;
+  }
+
+  /* Dark theme (dark icons) */
+  .social-icon-dark {
+    @apply border border-dark text-dark hover:text-blue hover:border-blue;
+  }
+
+  .social-icons-container {
+    @apply flex items-center gap-4;
+  }
+
+  /* Tabs */
+  .tab-button {
+    @apply text-lg font-heebo transition-all duration-300 relative;
+  }
+
+  .tab-button-active {
+    @apply text-blue border-b-2 border-blue;
+  }
+
+  .tab-button-inactive {
+    @apply text-dark hover:text-blue;
+  }
+
+  .tab-content {
+    @apply transition-opacity duration-300;
+  }
+
+  /* Accordions */
+  .accordion-container {
+    @apply divide-y divide-light/10;
+  }
+
+  .accordion-item {
+    @apply border-t border-light/10 first:border-t-0;
+  }
+
+  .accordion-header {
+    @apply flex items-center justify-between w-full py-6 px-4 text-left transition-all duration-300 cursor-pointer;
+  }
+
+  .accordion-title {
+    @apply font-barlow text-xl md:text-2xl font-bold tracking-wide text-light hover:text-blue transition-colors duration-300;
+  }
+
+  .accordion-content {
+    @apply px-4 overflow-hidden transition-all duration-500 ease-in-out;
+  }
+
+  .accordion-icon {
+    @apply ml-6 flex-shrink-0 transition-transform duration-300;
+  }
+}
+
+/* Hero Section */
+.hero-container {
+  @apply relative min-h-screen;
+}
+
+.hero-content {
+  @apply relative z-10 container xl:max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center justify-center sm:justify-start;
+}
+
+.hero-title {
+  @apply font-barlow text-5xl md:text-6xl lg:text-7xl font-bold text-light max-w-[90%] sm:max-w-none;
+}
+
+.hero-subtitle {
+  @apply font-heebo text-xl md:text-2xl text-light tracking-wide max-w-[90%] sm:max-w-none;
+}
+
+/* Image Text Section */
+.image-text-section {
+  @apply w-full bg-dark py-24;
+}
+
+.image-text-container {
+  @apply container xl:max-w-[1280px] mx-auto px-4;
+}
+
+.image-text-grid {
+  @apply grid lg:grid-cols-2 gap-x-20 gap-y-8 items-center;
+}
+
+.image-text-content {
+  @apply space-y-6;
+}
+
+.image-text-image {
+  @apply w-full h-auto rounded-lg shadow-xl;
+}
+
+/* Course Table */
+.course-table {
+  @apply max-w-2xl mx-auto bg-light rounded-lg overflow-hidden;
+}
+
+.course-header {
+  @apply text-center p-8 space-y-2;
+}
+
+.course-title {
+  @apply font-barlow text-4xl md:text-5xl font-bold text-dark;
+}
+
+.course-price {
+  @apply text-blue text-3xl md:text-4xl font-barlow font-bold;
+}
+
+.course-row {
+  @apply p-6 text-center border-t border-dark/10 first:border-t-0;
+}
+
+.course-text {
+  @apply text-lg font-heebo text-dark;
+}
+
+/* Cards */
+.card {
+  @apply bg-dark rounded-lg shadow-xl p-6 transition-transform duration-300 hover:scale-105;
+}
+
+/* Lists */
+.list-styled {
+  @apply space-y-2;
+}
+
+.list-styled li {
+  @apply flex items-center gap-2 font-heebo text-lg;
+}
+
+/* Forms */
+.form-input {
+  @apply w-full px-4 py-3 bg-light border border-dark/50 rounded-md font-heebo text-dark focus:outline-none focus:border-blue transition-colors duration-300;
+}
+
+.form-label {
+  @apply block text-dark font-heebo mb-2 uppercase;
+}
+
+.form-group {
+  @apply space-y-6;
+}
+
+/* Map */
+.map-container {
+  @apply mx-auto relative z-10;
+}
+
+.map-frame {
+  @apply h-[500px] w-full rounded-lg shadow-lg 
+         transition-shadow duration-300
+         hover:shadow-xl;
+}
+
+/* Text Highlights */
+.highlight {
+  @apply text-blue;
+}
+
+.highlight-alt {
+  @apply text-light;
+}
+
+/* Section Headers */
+.section-title {
+  @apply flex flex-col gap-2 mb-8;
+}
+
+.section-title-highlight {
+  @apply text-blue font-barlow text-xl tracking-wider uppercase;
+}
+
+/* Utilities */
+@layer utilities {
+
+  /* Text Effects */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue to-light;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-blue/20;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    @apply opacity-0 animate-[fadeIn_0.5s_ease-in_forwards];
+  }
+
+  .animate-slide-up {
+    @apply translate-y-4 opacity-0 animate-[slideUp_0.5s_ease-out_forwards];
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,56 @@
+---
+import BgImage from '../assets/background/rider-background.jpg'
+
+interface Props {
+  title?: string;
+  content?: string;
+  imageAlt: string;
+  showButton?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+const {
+  title,
+  content,
+  imageAlt,
+  showButton = false,
+  buttonText,
+  buttonLink,
+} = Astro.props;
+---
+
+<section class="relative w-full h-[600px] overflow-hidden">
+  {/* Background Image */}
+  <div class="absolute inset-0">
+    <img
+      src={BgImage.src}
+      alt={imageAlt}
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  {/* Content */}
+  <div class="relative h-full container xl:max-w-[1280px] mx-auto px-4">
+    <div class="flex flex-col items-center justify-center h-full text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-32">
+      {/* Title */}
+      <div class="mb-4">
+        <h3 class=" text-dark">
+          {title}
+        </h3>
+      </div>
+
+      {/* Content */}
+      <p class="text-dark mb-8">
+        {content}
+      </p>
+
+      {/* Optional Button */}
+      {showButton && (
+        <a href={buttonLink} class="btn-primary mt-4">
+          {buttonText}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

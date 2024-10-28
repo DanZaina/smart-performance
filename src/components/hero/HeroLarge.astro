@@ -1,0 +1,58 @@
+---
+import heroImage from '../../assets/hero/smart-hero-main.jpg'
+const { 
+} = Astro.props;
+---
+
+<section class="hero-container" aria-label="Hero">
+  {/* Background Image */}
+  <div class="absolute inset-0">
+    <img 
+      src={heroImage.src}
+      alt="BMW GS motorcycle jumping"
+      class="w-full h-full object-cover object-[30%_center] sm:object-[75%_center] lg:object-center"
+    />
+  </div>
+
+  {/* Content Container */}
+  <div class="hero-content items-center sm:items-center md:items-center">
+    <div class="w-full max-w-[90%] sm:max-w-2xl mx-auto sm:mx-0">
+      <div class="space-y-6 sm:space-y-8 md:space-y-10 text-center sm:text-left">
+        {/* Main Heading */}
+        <h1 class="hero-title mx-auto sm:mx-0">
+          <span class="block hover-lift">ADVANCED SKILLS.</span>
+          <span class="block hover-lift">AMAZING THRILLS.</span>
+        </h1>
+
+        {/* Subtitle - Adjusted spacing */}
+        <p class="hero-subtitle mx-auto sm:mx-0 max-w-[90%] sm:max-w-none">
+          <span class="block">TOP-TIER MOTORCYCLE TRAINING</span>
+          <span class="block mt-1 sm:mt-0 sm:inline sm:ml-1">IN HORSESHOE ONTARIO.</span>
+        </p>
+
+        {/* CTA Button - Enhanced centering */}
+        <div class="flex justify-center sm:justify-start">
+          <a href="#book" class="btn-secondary group">
+            <span>BOOK NOW</span>
+            <span class="inline-block ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Gradient Overlay */}
+  <div class="absolute inset-0 z-[1]">
+    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40
+                sm:from-black/60 sm:via-black/40 sm:to-transparent
+                md:from-black/50 md:via-black/30 md:to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent
+                sm:from-black/20 sm:to-transparent"></div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --content-max-width: 90%;
+  }
+</style>

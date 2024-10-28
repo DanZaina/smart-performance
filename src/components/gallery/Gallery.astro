@@ -1,0 +1,190 @@
+---
+// src/components/Gallery.astro
+import "remixicon/fonts/remixicon.css";
+
+interface Image {
+    src: string;
+    alt: string;
+    category?: string;
+}
+
+interface Props {
+    images: Image[];
+    title?: string;
+    subtitle?: string;
+}
+const {
+    images,
+    title = "GALLERY",
+    subtitle = "Check out our latest photos",
+} = Astro.props;
+---
+
+<section class="py-24 bg-dark">
+    {/* Header */}
+    <div class="container xl:max-w-[1280px] mx-auto px-4 mb-12">
+        <h2 class="text-4xl font-bold font-barlow mb-4 text-center">
+            <span class="text-blue">{title}</span>
+        </h2>
+        {subtitle && <p class="text-light text-center text-lg">{subtitle}</p>}
+    </div>
+
+    {/* Gallery Grid */}
+    <div class="container xl:max-w-[1280px] mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                images.map((image, index) => (
+                    <div class="aspect-square overflow-hidden group relative">
+                        <img
+                            src={image.src}
+                            alt={image.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                            data-gallery-item={index}
+                        />
+                        <div class="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button
+                                class="text-light hover:text-blue transition-colors duration-300 view-image"
+                                data-index={index}
+                            >
+                                <i class="ri-zoom-in-line text-3xl" />
+                            </button>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+{/* Image Modal */}
+<div id="imageModal" class="fixed inset-0 bg-dark/95 z-50 hidden">
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="relative w-full max-w-6xl">
+            <img id="modalImage" src="" alt="" class="w-full h-auto" />
+
+            {/* Navigation Buttons */}
+            <button
+                id="prevImage"
+                class="absolute left-4 top-1/2 -translate-y-1/2 text-light hover:text-blue transition-colors duration-300"
+            >
+                <i class="ri-arrow-left-line text-4xl"></i>
+            </button>
+
+            <button
+                id="nextImage"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-light hover:text-blue transition-colors duration-300"
+            >
+                <i class="ri-arrow-right-line text-4xl"></i>
+            </button>
+
+            {/* Close Button */}
+            <button
+                id="closeModal"
+                class="absolute -top-12 right-0 text-light hover:text-blue transition-colors duration-300"
+            >
+                <i class="ri-close-line text-3xl"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Type definitions
+    interface GalleryImage extends HTMLImageElement {
+        dataset: {
+            galleryItem: string;
+        };
+    }
+
+    // Initialize after DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentIndex = 0;
+        const images = Array.from(
+            document.querySelectorAll<GalleryImage>("[data-gallery-item]"),
+        );
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById(
+            "modalImage",
+        ) as HTMLImageElement;
+        const prevButton = document.getElementById("prevImage");
+        const nextButton = document.getElementById("nextImage");
+        const closeButton = document.getElementById("closeModal");
+
+        if (
+            !modal ||
+            !modalImage ||
+            !prevButton ||
+            !nextButton ||
+            !closeButton
+        ) {
+            console.error("Required elements not found");
+            return;
+        }
+
+        function updateModalImage() {
+            const currentImg = images[currentIndex];
+            if (currentImg) {
+                modalImage.src = currentImg.src;
+                modalImage.alt = currentImg.alt;
+            }
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateModalImage();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        }
+
+        function closeModal() {
+            if (modal) {
+                modal.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        // Event Listeners
+        document.querySelectorAll(".view-image").forEach((button) => {
+            button.addEventListener("click", () => {
+                const index = button.getAttribute("data-index");
+                if (index) {
+                    currentIndex = parseInt(index);
+                    updateModalImage();
+                    modal.classList.remove("hidden");
+                    document.body.style.overflow = "hidden";
+                }
+            });
+        });
+
+        nextButton.addEventListener("click", nextImage);
+        prevButton.addEventListener("click", prevImage);
+        closeButton.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+            if (!modal.classList.contains("hidden")) {
+                switch (e.key) {
+                    case "ArrowRight":
+                        nextImage();
+                        break;
+                    case "ArrowLeft":
+                        prevImage();
+                        break;
+                    case "Escape":
+                        closeModal();
+                        break;
+                }
+            }
+        });
+    });
+</script>

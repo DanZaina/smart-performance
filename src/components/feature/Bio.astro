@@ -1,0 +1,169 @@
+---
+interface Props {
+  imagePosition?: "left" | "right";
+  title: string;
+  titleHighlight: string;
+  description: string;
+  expandedContent?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  showButton?: boolean;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const {
+  imagePosition = "left",
+  title,
+  titleHighlight,
+  description,
+  expandedContent = "",
+  buttonText = "",
+  buttonLink = "#",
+  showButton = true,
+  imageSrc,
+  imageAlt,
+} = Astro.props;
+
+// Dynamic image sizes based on Tailwind breakpoints
+const imageSizes = {
+  sm: "320",
+  md: "480",
+  lg: "640",
+  xl: "800",
+  "2xl": "1000",
+};
+
+const srcset = Object.entries(imageSizes)
+  .map(([_, size]) => `https://placehold.co/${size}x${size} ${size}w`)
+  .join(", ");
+
+const sizes = `
+  (max-width: 640px) 320px,
+  (max-width: 768px) 480px,
+  (max-width: 1024px) 640px,
+  (max-width: 1280px) 800px,
+  1000px
+`
+  .replace(/\s+/g, " ")
+  .trim();
+---
+
+<div class="relative w-full bg-light py-32 overflow-hidden">
+  {/* Background Lines */}
+  <div class="absolute inset-0">
+    <div class="container xl:max-w-[1280px] h-full mx-auto px-4 relative">
+      <div class="absolute inset-0 flex justify-between pointer-events-none">
+        <div class="w-px h-full bg-dark/5"></div>
+        <div class="w-px h-full bg-dark/5"></div>
+        <div class="w-px h-full bg-dark/5"></div>
+        <div class="w-px h-full bg-dark/5"></div>
+        <div class="w-px h-full bg-dark/5"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container xl:max-w-[1280px] mx-auto px-4 relative">
+    <div class="grid lg:grid-cols-2 gap-x-20 gap-y-8 items-center">
+      {/* Image Section */}
+      <div class={`w-full ${imagePosition === "right" ? "lg:order-2" : ""}`}>
+        <img
+          src={imageSrc}
+          srcset={srcset}
+          sizes={sizes}
+          alt={imageAlt}
+          class="w-full h-auto rounded-lg shadow-xl"
+          loading="lazy"
+        />
+      </div>
+
+      {/* Content Section */}
+      <div
+        class={`space-y-6 relative ${imagePosition === "right" ? "lg:order-1" : ""}`}
+      >
+        <h2>
+          <span class="text-blue">{titleHighlight}</span>
+          <span class="text-dark">{title}</span>
+        </h2>
+
+        <p class="text-lg font-heebo text-dark leading-loose">
+          {description}
+        </p>
+
+        {/* Expandable Content */}
+        <div
+          class="expandable-content hidden space-y-6 pt-6"
+          aria-hidden="true"
+        >
+          <p class="text-dark">
+            {expandedContent}
+          </p>
+        </div>
+
+        {
+          showButton && buttonText && (
+            <button
+              class="expand-button btn-primary inline-flex items-center gap-2"
+              aria-expanded="false"
+            >
+              <span>{buttonText}</span>
+              <svg
+                class="w-4 h-4 transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const expandButtons = document.querySelectorAll(".expand-button");
+
+    expandButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const content = button.parentElement?.querySelector(
+          ".expandable-content",
+        );
+        const svg = button.querySelector("svg");
+
+        if (content && svg) {
+          const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+          // Toggle content
+          content.classList.toggle("hidden");
+          content.setAttribute("aria-hidden", (!isExpanded).toString());
+
+          // Update button state
+          button.setAttribute("aria-expanded", (!isExpanded).toString());
+
+          // Rotate arrow
+          svg.style.transform = isExpanded ? "" : "rotate(180deg)";
+
+          // Smooth scroll if expanding
+          if (!isExpanded) {
+            content.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .expandable-content {
+    transition: all 400ms ease-in-out;
+  }
+</style>

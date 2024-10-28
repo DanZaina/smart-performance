@@ -1,0 +1,191 @@
+---
+// src/components/ImageTextSection.astro
+import 'remixicon/fonts/remixicon.css';
+
+interface Props {
+  imagePosition?: 'left' | 'right';
+  theme?: 'dark' | 'grey';
+  title: string;
+  titleHighlight: string;
+  description: string;
+  buttonText?: string;
+  buttonLink?: string;
+  showButton?: boolean;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
+  showSecondaryButton?: boolean;
+  imageSrc: string;
+  imageAlt: string;
+  isVideo?: boolean;
+  videoUrl?: string; // Full YouTube URL
+}
+
+const {
+  imagePosition = 'left',
+  theme = 'dark',
+  title,
+  titleHighlight,
+  description,
+  buttonText = '',
+  buttonLink = '#',
+  showButton = true,
+  secondaryButtonText = '',
+  secondaryButtonLink = '#',
+  showSecondaryButton = false,
+  imageSrc,
+  imageAlt,
+  isVideo = false,
+  videoUrl = ''
+} = Astro.props;
+
+const themeClasses = {
+  dark: {
+    background: 'bg-dark',
+    text: 'text-light',
+  },
+  grey: {
+    background: 'bg-light',
+    text: 'text-dark',
+  }
+};
+
+const currentTheme = themeClasses[theme];
+---
+
+<div class={`w-full ${currentTheme.background} py-24`}>
+  <div class="container xl:max-w-[1280px] mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-x-20 gap-y-8 items-center">
+      {/* Image/Video Section */}
+      <div class={`w-full ${imagePosition === 'right' ? 'lg:order-2' : ''}`}>
+        <div class="relative group">
+          <img 
+            src={imageSrc}
+            alt={imageAlt}
+            class="w-full h-auto rounded-lg shadow-xl"
+          />
+          
+          {isVideo && videoUrl && (
+            <button 
+              type="button"
+              class="absolute inset-0 flex items-center justify-center play-button"
+              data-video-url={videoUrl}
+            >
+              <div class="relative">
+                <div class="absolute inset-0 bg-blue rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div class="relative w-16 h-16 flex items-center justify-center bg-blue rounded-full text-light transform group-hover:scale-110 transition-transform duration-300">
+                  <i class="ri-play-fill text-3xl"></i>
+                </div>
+              </div>
+              <div class="absolute inset-0 bg-dark/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div class={`space-y-6 ${imagePosition === 'right' ? 'lg:order-1' : ''}`}>
+        <h2 class="text-4xl font-bold leading-tight font-barlow tracking-wide">
+          <span class="text-blue">{titleHighlight}</span> 
+          <span class={currentTheme.text}>{title}</span>
+        </h2>
+        <p class={currentTheme.text}>
+          {description}
+        </p>
+        
+        <div class="flex flex-wrap gap-4 pt-2">
+          {showButton && buttonText && (
+            <a href={buttonLink} class="btn-primary">
+              {buttonText}
+            </a>
+          )}
+
+          {showSecondaryButton && secondaryButtonText && (
+            <a href={secondaryButtonLink} class="btn-secondary">
+              {secondaryButtonText}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* Simple Video Modal */}
+<div id="videoModal" class="fixed inset-0 bg-dark/90 z-50 hidden">
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div class="relative w-full max-w-4xl aspect-video bg-dark">
+      <div id="videoContainer" class="w-full h-full"></div>
+      <button 
+        type="button"
+        class="absolute -top-10 right-0 text-light hover:text-blue transition-colors duration-300"
+        onclick="closeVideo()"
+      >
+        <i class="ri-close-line text-3xl"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function getYouTubeEmbedUrl(url) {
+    // Handle different YouTube URL formats
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 
+      ? `https://www.youtube.com/embed/${match[2]}?autoplay=1`
+      : null;
+  }
+
+  // Open video modal
+  document.querySelectorAll('.play-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const videoUrl = button.getAttribute('data-video-url');
+      if (videoUrl) {
+        const embedUrl = getYouTubeEmbedUrl(videoUrl);
+        if (embedUrl) {
+          const modal = document.getElementById('videoModal');
+          const container = document.getElementById('videoContainer');
+          
+          // Create and add iframe
+          container.innerHTML = `
+            <iframe
+              src="${embedUrl}"
+              class="w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          `;
+          
+          // Show modal
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+  });
+
+  // Close video modal
+  function closeVideo() {
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    
+    container.innerHTML = ''; // Remove iframe
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close on background click
+  document.getElementById('videoModal').addEventListener('click', (e) => {
+    if (e.target.id === 'videoModal') {
+      closeVideo();
+    }
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeVideo();
+    }
+  });
+</script>

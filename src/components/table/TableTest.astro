@@ -1,0 +1,58 @@
+---
+import CourseTable from '../table/PricingTable.astro';
+---
+
+<section class="py-24 bg-light">
+  <div class="container xl:max-w-[1280px] mx-auto px-4">
+    {/* Grid Container for Tables */}
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Two Day Course */}
+      <CourseTable
+        title="2 DAY BMW GS COURSE"
+        price="$1400 + TAX"
+        details={[
+          "2-day program (Level 1)",
+          "Designed for M2 or full M licensed riders",
+          "Participants must be aged 25+",
+          "Focus on boosting adventure riding skills",
+          "Fees include full safety gear",
+          "BMW F 800 GS",
+          "BMW F 900 GS",
+          "BMW R 1300 GS",
+        ]}
+      />
+
+      {/* One-on-One Course */}
+      <CourseTable
+        title="One-on-One"
+        price="Call for pricing"
+        details={[
+          "2-day program (Level 1)",
+          "Designed for M2 or full M licensed riders",
+          "Participants must be aged 25+",
+          "Focus on boosting adventure riding skills",
+          "Fees include full safety gear",
+          "BMW F 800 GS",
+          "BMW F 900 GS",
+          "BMW R 1300 GS",
+        ]}
+      />
+
+      {/* Maintenance Course */}
+      <CourseTable
+        title="Maintenance Course"
+        price="$249 + tax"
+        details={[
+          "2-day program (Level 1)",
+          "Designed for M2 or full M licensed riders",
+          "Participants must be aged 25+",
+          "Focus on boosting adventure riding skills",
+          "Fees include full safety gear",
+          "BMW F 800 GS",
+          "BMW F 900 GS",
+          "BMW R 1300 GS",
+        ]}
+      />
+    </div>
+  </div>
+</section>

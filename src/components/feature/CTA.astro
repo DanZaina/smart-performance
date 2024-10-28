@@ -1,0 +1,55 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  backgroundImage?: string;
+}
+
+const {
+  title = "CHECK OUT",
+  subtitle = "OUR SCHEDULES & PRICING",
+  buttonText = "LEARN MORE",
+  buttonLink = "/schedules",
+  backgroundImage = "https://placehold.co/1920x600"
+} = Astro.props;
+---
+
+<section class="relative w-full h-[600px] overflow-hidden">
+  {/* Background Image with Overlay */}
+  <div class="absolute inset-0">
+    <img 
+      src={backgroundImage}
+      alt="Background"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/50 to-dark/30"></div>
+  </div>
+
+  {/* Content */}
+  <div class="relative h-full container xl:max-w-[1280px] mx-auto px-4">
+    <div class="flex flex-col items-center justify-center h-full text-center">
+      {/* Title with Line Break for Mobile */}
+      <h2 class="text-light mb-4">
+        {title}<br />
+        {subtitle}
+      </h2>
+
+      {/* Button */}
+      <a 
+        href={buttonLink} 
+        class="btn-primary mt-8 border-2 border-light text-light hover:bg-light hover:text-dark"
+      >
+        {buttonText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Optional: Add any component-specific styles here */
+  section {
+    @apply bg-dark; /* Fallback color before image loads */
+  }
+</style>

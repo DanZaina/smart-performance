@@ -1,0 +1,44 @@
+---
+// src/components/SocialIcons.astro
+import 'remixicon/fonts/remixicon.css';
+
+interface Props {
+  className?: string;
+  theme?: 'light' | 'dark'; // Add theme prop
+}
+
+const { 
+  className = "",
+  theme = 'light' // Default to light theme (white icons)
+} = Astro.props;
+
+const socialIcons = [
+  {
+    name: "Facebook",
+    href: "#",
+    iconClass: "ri-facebook-fill"
+  },
+  {
+    name: "Instagram",
+    href: "#",
+    iconClass: "ri-instagram-line"
+  },
+  {
+    name: "YouTube",
+    href: "#",
+    iconClass: "ri-youtube-fill"
+  }
+];
+---
+
+<div class={`social-icons-container ${className}`}>
+  {socialIcons.map((item) => (
+    <a 
+      href={item.href} 
+      class={`social-icon ${theme === 'dark' ? 'social-icon-dark' : 'social-icon-light'}`} 
+      aria-label={item.name}
+    >
+      <i class={`${item.iconClass} text-lg`}></i>
+    </a>
+  ))}
+</div>

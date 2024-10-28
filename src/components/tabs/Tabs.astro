@@ -1,0 +1,70 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+  isActive?: boolean;
+}
+
+interface Props {
+  tabs: Tab[];
+}
+
+const { tabs } = Astro.props;
+---
+
+<div class="container xl:max-w-[1280px] mx-auto px-4">
+  {/* Tabs Wrapper */}
+  <div class="border-b-2 border-dark/10">
+    <div class="flex space-x-8 justify-center">
+      {tabs.map((tab) => (
+        <button
+          id={`tab-${tab.id}`}
+          class={`relative py-4 text-lg font-bold font-heebo transition-colors duration-300 ${
+            tab.isActive 
+              ? 'text-blue border-b-2 border-blue' 
+              : 'text-dark hover:text-blue'
+          }`}
+          aria-selected={tab.isActive ? 'true' : 'false'}
+          role="tab"
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Tab Panels */}
+  <div class="mt-8">
+    {/* Each panel's content will be rendered here */}
+    <slot />
+  </div>
+</div>
+
+<script>
+  function setupTabs() {
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active states from all tabs
+        tabButtons.forEach(tab => {
+          tab.classList.remove('text-blue', 'border-b-2', 'border-blue');
+          tab.classList.add('text-dark');
+          tab.setAttribute('aria-selected', 'false');
+        });
+
+        // Add active state to clicked tab
+        button.classList.remove('text-dark');
+        button.classList.add('text-blue', 'border-b-2', 'border-blue');
+        button.setAttribute('aria-selected', 'true');
+
+        // You can add logic here to show/hide corresponding content
+        const tabId = button.id;
+        // Show content based on tabId...
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', setupTabs);
+</script>

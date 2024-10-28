@@ -1,0 +1,32 @@
+---
+import Tabs from '../tabs/Tabs.astro';
+
+const tabItems = [
+  {
+    id: 'pricing',
+    label: 'COURSE PRICING',
+    isActive: true
+  },
+  {
+    id: 'calendar',
+    label: 'COURSE CALENDAR',
+    isActive: false
+  }
+];
+---
+
+<section class="py-16 bg-light">
+  <Tabs tabs={tabItems}>
+    {/* Pricing Content */}
+    <div id="panel-pricing" role="tabpanel" aria-labelledby="tab-pricing">
+      {/* Your pricing content here */}
+      <p>Pricing content...</p>
+    </div>
+    
+    {/* Calendar Content */}
+    <div id="panel-calendar" role="tabpanel" aria-labelledby="tab-calendar" hidden>
+      {/* Your calendar content here */}
+      <p>Calendar content...</p>
+    </div>
+  </Tabs>
+</section>

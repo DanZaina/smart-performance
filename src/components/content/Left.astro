@@ -1,0 +1,64 @@
+---
+interface Props {
+    theme?: "dark" | "light";
+    title?: string;
+    content?: string;
+    showButton?: boolean;
+    buttonText?: string;
+    buttonLink?: string;
+}
+
+const {
+    theme = "dark",
+    title,
+    content,
+    showButton = false,
+    buttonText,
+    buttonLink,
+} = Astro.props;
+
+// Theme-based classes
+const themeClasses = {
+    dark: {
+        background: "bg-dark",
+        text: "text-light",
+    },
+    light: {
+        background: "bg-light",
+        text: "text-dark",
+    },
+};
+const currentTheme = themeClasses[theme];
+---
+
+<section
+    class={`relative w-full overflow-hidden ${currentTheme.background} py-24`}
+>
+    {/* Content */}
+    <div class="relative h-full container xl:max-w-[1280px] mx-auto px-4">
+        <div
+            class="flex flex-col justify-left h-full text-left max-w-5xl mx-auto px-4 sm:px-6 lg:px-32"
+        >
+            {/* Title */}
+            <div class="mb-4">
+                <h3 class={currentTheme.text}>
+                    {title}
+                </h3>
+            </div>
+
+            {/* Content */}
+            <p class={`${currentTheme.text}`}>
+                {content}
+            </p>
+
+            {/* Optional Button */}
+            {
+                showButton && (
+                    <a href={buttonLink} class="btn-primary mt-4">
+                        {buttonText}
+                    </a>
+                )
+            }
+        </div>
+    </div>
+</section>

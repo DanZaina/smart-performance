@@ -1,0 +1,126 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/hero/HeroSmall.astro";
+import Intro from "../components/content/Intro.astro";
+import ImageTextSection from "../components/feature/2col.astro";
+import Bio from "../components/feature/Bio.astro";
+import CTA from "../components/feature/CTA.astro";
+import Testimonial from "../components/feature/Testimonial.astro";
+import Centred from "../components/content/Centred.astro";
+import Left from "../components/content/Left.astro";
+import Accordion from "../components/accordions/Accordion.astro";
+import Tabs from "../components/tabs/TabTest.astro";
+import CourseTable from "../components/table/TableTest.astro";
+import ContactSection from "../components/contact/ContactSection.astro";
+import Map from "../components/contact/Map.astro";
+import Gallery from "../components/gallery/GalleryTest.astro";
+---
+
+<Layout title="SMART Performance Centre">
+  <Hero
+    title="SMART Performance Centre"
+    backgroundImage="https://placehold.co/1920x600"
+  />
+  <!-- <section class="py-36 bg-dark"> -->
+  <!-- <Feature
+    imagePosition="left"
+    title="Off-Road Riding Courses"
+    titleHighlight="EXPERIENCE"
+    description="Our off-road riding courses are designed to help you master the skills you need to become a better rider. Whether you're new to off-road riding or a seasoned pro, our courses will challenge and inspire you."
+    buttonText="VIEW COURSES"
+    buttonLink="/courses"
+    showButton={true}
+    secondaryButtonText="LEARN MORE"
+    secondaryButtonLink = "/about"
+    showSecondaryButton={true}
+    imageSrc="https://placehold.co/1000x1000"
+    imageAlt="Professional motorcycle training"
+  /> -->
+  <!-- <Bio
+      imagePosition="left"
+      title="Off-Road Riding Courses"
+      ;
+      titleHighlight="EXPERIENCE"
+      ;
+      description="Our off-road riding courses are designed to help you master the skills you need to become a better rider. Whether you're new to off-road riding or a seasoned pro, our courses will challenge and inspire you."
+      ;
+      expandedContent="lorem ipsum dolor sit amet"
+      ;
+      buttonText="VIEW COURSES"
+      ;
+      buttonLink="/courses"
+      ;
+      showButton={true}
+      imageSrc="https://placehold.co/1000x1000"
+      ;
+      imageAlt="Professional motorcycle training"
+      ;
+    /> -->
+  <!-- <Centred
+      title="Off-Road Riding Courses"
+      content="Our off-road riding courses are designed to help you master the skills you need to become a better rider. Whether you're new to off-road riding or a seasoned pro, our courses will challenge and inspire you."
+      imageAlt="Professional motorcycle training"
+      showButton={true}
+      buttonText="VIEW COURSES"
+      buttonLink="/courses"
+    /> -->
+  <!-- <Accordion
+    /> -->
+  <!-- <CourseTable
+  /> -->
+  <!-- </section> -->
+  <!-- <Tabs /> -->
+  <ImageTextSection
+  imagePosition="right"
+  theme="dark"
+  title="WATCH OUR TRAINING"
+  titleHighlight="EXPERIENCE"
+  description="See what it's like to train with us..."
+  buttonText="VIEW MORE VIDEOS"
+  buttonLink="/videos"
+  imageSrc="https://placehold.co/1000x1000"
+  imageAlt="Training video preview"
+  isVideo={true}
+  videoUrl="https://www.youtube.com/watch?v=ZbUENJ5FjBk" 
+  showButton={true}
+/>
+  <Intro
+    mainTitle="RIDE WITH"
+    highlightedText="CONFIDENCE"
+    secondaryTitle="& PRECISION"
+    subtitle="DELIVERING THE ULTIMATE OFF-ROAD MOTORCYCLE TRAINING EXPERIENCE FOR OVER 20 YEARS."
+  />
+  <ContactSection
+    titleHighlight="Contact"
+    title="us today to elevate your riding skills!"
+    description="Have questions about our BMW GS off-road motorcycle training programs? Fill out our form and one of our experienced instructors will get back to you shortly. We're here to help you start your adventure riding journey."
+  />
+  <section class="bg-dark md:-mt-36">
+    <div class="lg:py-10">
+      <Left
+        theme="dark"
+        title="Finding SMART Performance Centre & SMART Adventures."
+        content="We're conveniently located just over an hour north of Toronto and 15 minutes north of Barrie. For accurate directions, please use this address in your GPS or smartphone: 3303 3rd Line N. Barrie, ON L0L 2L0."
+        showButton={false}
+        buttonText="VIEW COURSES"
+        ;
+        buttonLink="/courses"
+        ;
+      />
+    </div>
+  </section>
+  <!-- <CTA
+    title = "CHECK OUT"
+    subtitle = "OUR SCHEDULES & PRICING"
+    buttonText = "LEARN MORE"
+    buttonLink = "/schedules"
+    backgroundImage = "https://placehold.co/1920x600"]
+  /> -->
+  <Testimonial
+    title="What Our Customers Say"
+    titleHighlight="CUSTOMER"
+    content="I had a great experience with SMART Performance Centre. The instructors were knowledgeable and friendly, and the course was challenging and fun. I would highly recommend it to anyone looking to improve their riding skills."
+    author="John Doe"
+  />
+  <Gallery />
+</Layout>

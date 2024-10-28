@@ -1,0 +1,27 @@
+---
+import Gallery from '../gallery/Gallery.astro';
+
+const images = [
+  {
+    src: "https://placehold.co/1000x1000",
+    alt: "Training session 1",
+    category: "training"
+  },
+  {
+    src: "https://placehold.co/1000x1000",
+    alt: "Training session 2",
+    category: "training"
+  },
+  // Add more images...
+];
+
+---
+
+
+<section>
+    <Gallery 
+    images={images}
+    title="OUR GALLERY"
+    subtitle="Experience the thrill of off-road training"
+  />
+</section>
