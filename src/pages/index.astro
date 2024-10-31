@@ -15,6 +15,35 @@ import ContactSection from "../components/contact/ContactSection.astro";
 import Map from "../components/contact/Map.astro";
 import Gallery from "../components/gallery/GalleryTest.astro";
 import SlidingText from '../components/feature/SlidingText.astro';
+import ProductGrid from '../components/cards/ProductGrid.astro';
+
+// This could come from an API or database in a real application
+const products = [
+  {
+    id: '1',
+    title: 'Premium Headphones',
+    price: 299.99,
+    imageUrl: 'https://placehold.co/200x200'
+  },
+  {
+    id: '2',
+    title: 'Smart Watch',
+    price: 199.99,
+    imageUrl: 'https://placehold.co/200x200'
+  },
+  {
+    id: '3',
+    title: 'Wireless Earbuds',
+    price: 149.99,
+    imageUrl: 'https://placehold.co/200x200'
+  },
+  {
+    id: '4',
+    title: 'Wireless Earbuds',
+    price: 149.99,
+    imageUrl: 'https://placehold.co/200x200'
+  },
+];
 ---
 
 <Layout title="SMART Performance Centre">
@@ -124,6 +153,8 @@ import SlidingText from '../components/feature/SlidingText.astro';
     author="John Doe"
   />
   <!-- <Gallery /> -->
-    <SlidingText />
-
+    <!-- <SlidingText /> -->
+      <div class="py-12 bg-white">
+      <ProductGrid products={products} />
+    </div>
 </Layout>
