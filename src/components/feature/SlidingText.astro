@@ -1,0 +1,91 @@
+---
+// src/components/SlidingTextSection.astro
+---
+
+<section class="container mx-auto relative py-12 md:py-16 lg:py-24">
+  <div class="grid md:grid-cols-2 items-center gap-12">
+    <!-- Column 1: Sliding Text -->
+    <div class="p-8 md:p-16">
+      <div class="flex flex-col space-y-8 md:space-y-12" id="sliding-text">
+        <h3 class="transition-all duration-500" data-text>Exclusive BMW Motorcycles</h3>
+        <h3 class="transition-all duration-500" data-text>Scenic Training Grounds</h3>
+        <h3 class="transition-all duration-500" data-text>Nearby Accommodations</h3>
+        <h3 class="transition-all duration-500" data-text>Expert Instructors</h3>
+        <h3 class="transition-all duration-500" data-text>Comprehensive Training</h3>
+      </div>
+    </div>
+
+    <!-- Column 2: Image -->
+    <div class="w-full max-w-lg mx-auto relative overflow-hidden">
+      <img src="https://placehold.co/400x500" alt="Placeholder image"
+        class="w-full object-cover shadow-lg transition-transform duration-700 hover:scale-105" />
+    </div>
+  </div>
+</section>
+
+<script>
+  const textElements = document.querySelectorAll('[data-text]');
+  let currentIndex = 0;
+
+  // Function for clean fade transition with subtle slide
+  const updateText = (index, active) => {
+    const element = textElements[index];
+    if (active) {
+      element.style.color = '#4599FE';
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+      // Add a subtle text shadow for depth
+      element.style.textShadow = '0 1px 2px rgba(69, 153, 254, 0.1)';
+    } else {
+      element.style.color = '#E9E9E9';
+      element.style.opacity = '0.4';
+      element.style.transform = 'translateY(0)';
+      element.style.textShadow = 'none';
+    }
+  };
+
+  // Initialize all texts
+  textElements.forEach((el, index) => {
+    el.style.opacity = index === 0 ? '1' : '0.4';
+    el.style.color = index === 0 ? '#4599FE' : '#E9E9E9';
+    el.style.transform = 'translateY(0)';
+
+    // Add subtle hover effect
+    el.addEventListener('mouseenter', () => {
+      if (index !== currentIndex) {
+        el.style.opacity = '0.7';
+      }
+    });
+
+    el.addEventListener('mouseleave', () => {
+      if (index !== currentIndex) {
+        el.style.opacity = '0.4';
+      }
+    });
+  });
+
+  // Animation loop with clean transitions
+  setInterval(() => {
+    // Fade out current
+    updateText(currentIndex, false);
+
+    // Update index
+    currentIndex = (currentIndex + 1) % textElements.length;
+
+    // Fade in new
+    updateText(currentIndex, true);
+  }, 2000);
+
+  // Optional: Add a subtle pulse animation to active text
+  const pulseAnimation = () => {
+    const activeText = textElements[currentIndex];
+    activeText.style.transform = 'translateY(-2px)';
+
+    setTimeout(() => {
+      activeText.style.transform = 'translateY(0)';
+    }, 200);
+  };
+
+  // Trigger pulse every 4 seconds
+  setInterval(pulseAnimation, 4000);
+</script>

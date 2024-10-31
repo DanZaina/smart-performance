@@ -14,6 +14,7 @@ import CourseTable from "../components/table/TableTest.astro";
 import ContactSection from "../components/contact/ContactSection.astro";
 import Map from "../components/contact/Map.astro";
 import Gallery from "../components/gallery/GalleryTest.astro";
+import SlidingText from '../components/feature/SlidingText.astro';
 ---
 
 <Layout title="SMART Performance Centre">
@@ -71,19 +72,19 @@ import Gallery from "../components/gallery/GalleryTest.astro";
   <!-- </section> -->
   <!-- <Tabs /> -->
   <ImageTextSection
-  imagePosition="right"
-  theme="dark"
-  title="WATCH OUR TRAINING"
-  titleHighlight="EXPERIENCE"
-  description="See what it's like to train with us..."
-  buttonText="VIEW MORE VIDEOS"
-  buttonLink="/videos"
-  imageSrc="https://placehold.co/1000x1000"
-  imageAlt="Training video preview"
-  isVideo={true}
-  videoUrl="https://www.youtube.com/watch?v=ZbUENJ5FjBk" 
-  showButton={true}
-/>
+    imagePosition="right"
+    theme="dark"
+    title="WATCH OUR TRAINING"
+    titleHighlight="EXPERIENCE"
+    description="See what it's like to train with us..."
+    buttonText="VIEW MORE VIDEOS"
+    buttonLink="/videos"
+    imageSrc="https://placehold.co/1000x1000"
+    imageAlt="Training video preview"
+    isVideo={true}
+    videoUrl="https://www.youtube.com/watch?v=ZbUENJ5FjBk"
+    showButton={true}
+  />
   <Intro
     mainTitle="RIDE WITH"
     highlightedText="CONFIDENCE"
@@ -117,10 +118,12 @@ import Gallery from "../components/gallery/GalleryTest.astro";
     backgroundImage = "https://placehold.co/1920x600"]
   /> -->
   <Testimonial
-    title="What Our Customers Say"
-    titleHighlight="CUSTOMER"
+    title="Customers Say"
+    titleHighlight="what our"
     content="I had a great experience with SMART Performance Centre. The instructors were knowledgeable and friendly, and the course was challenging and fun. I would highly recommend it to anyone looking to improve their riding skills."
     author="John Doe"
   />
-  <Gallery />
+  <!-- <Gallery /> -->
+    <SlidingText />
+
 </Layout>
